@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class WeatherForecstService {
+export class WeatherForecastService {
 
   constructor(
     private _http: HttpClient

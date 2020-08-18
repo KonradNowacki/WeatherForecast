@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DayWrapperComponent } from './day-wrapper/day-wrapper.component';
-import { WeatherForecstService } from './get-weather-forecst.service';
+import { WeatherForecastService } from './get-weather-forecast.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
-    WeatherForecstService
+    WeatherForecastService
   ],
   bootstrap: [AppComponent]
 })
