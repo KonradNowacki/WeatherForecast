@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+// TODO Make onpush
 @Component({
   selector: 'app-day-wrapper',
   templateUrl: './day-wrapper.component.html',
