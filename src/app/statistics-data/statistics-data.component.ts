@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { StatisticsData } from 'src/app/app.interface';
+
 @Component({
   selector: 'app-statistics-data',
   templateUrl: './statistics-data.component.html',
@@ -7,12 +9,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StatisticsDataComponent implements OnInit {
 
-  @Input() public statistics: any;
+  @Input() public statistics: StatisticsData;
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.statistics);
+    // console.log(this.statistics);
   }
 
 }

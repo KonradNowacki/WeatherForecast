@@ -8,3 +8,15 @@ export interface City {
     id: number;
     name: string;
 }
+
+export interface ForecastData {
+    dt_txt: string;
+    main: any;
+}
+
+export interface StatisticsData {
+    maxTemp: number;
+    minTemp: number;
+    meanTemp: number;
+    modeTemp: number[];
+}
