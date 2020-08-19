@@ -1,7 +1,13 @@
-<app-statistics-data></app-statistics-data>
+
+
+<app-statistics-data
+  *ngIf="statisticsData"
+  [statistics]="statisticsData"
+></app-statistics-data>
+
 <main>
-    <app-day-wrapper 
-      *ngFor="let dailyForecast of dailyForecasts"
-      [forecast]="dailyForecast"
-    ></app-day-wrapper>
+  <app-day-wrapper 
+    *ngFor="let dailyForecast of dailyForecasts"
+    [forecast]="dailyForecast"
+  ></app-day-wrapper>
 </main>

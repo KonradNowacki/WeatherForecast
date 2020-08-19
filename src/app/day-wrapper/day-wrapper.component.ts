@@ -1,11 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-
-export enum PartOfDay {
-  morning = '06:00:00',
-  day = '12:00:00',
-  night = '21:00:00'
-}
+import { PartOfDay } from './../app.interface';
 
 // TODO Make onpush
 @Component({
@@ -17,11 +12,11 @@ export class DayWrapperComponent implements OnInit {
 
   @Input() public forecast: any;
 
-  public morningTemperature: any;
-  public dailyTemperature: any;
-  public eveningTemperature: any;
+  public morningTemperature: number;
+  public dailyTemperature: number;
+  public eveningTemperature: number;
 
-  public humidity: any;
+  public humidity: number;
 
   ngOnInit(): void {
     this.morningTemperature = this.getTemperatureByPartOfDay(PartOfDay.morning);
@@ -34,26 +29,15 @@ export class DayWrapperComponent implements OnInit {
     switch (partOfDay) {
       case PartOfDay.morning:
         const morningForecast = this.filterForecastByPartOfDay(PartOfDay.morning);
-        if (morningForecast.length) {
-          return morningForecast[0].main.temp;
-        }
-        return;
+        return morningForecast.length ? morningForecast[0].main.temp : null;
 
       case PartOfDay.day:
         const dailyForecast = this.filterForecastByPartOfDay(PartOfDay.day);
-        // console.log(dailyForecast)
-        if (dailyForecast.length) {
-          return dailyForecast[0].main.temp;
-        }
-        return;
+        return dailyForecast.length ? dailyForecast[0].main.temp : null;
 
       case PartOfDay.night:
         const eveningForecast = this.filterForecastByPartOfDay(PartOfDay.night);
-        // console.log(eveningForecast)
-        if (eveningForecast.length) {
-          return eveningForecast[0].main.temp;
-        }
-        return;
+        return eveningForecast.length ? eveningForecast[0].main.temp : null;
     }
   }
 
@@ -62,9 +46,10 @@ export class DayWrapperComponent implements OnInit {
   }
 
   // make more defensive
-  private getAverageHumidity(): any {
+  // move calculating average to util
+  private getAverageHumidity(): number {
     const humidities = this.forecast[1].map(partOfDayForecast => partOfDayForecast.main.humidity);
-    const averageHumidity = humidities.reduce((sum, i) => sum + i) / humidities.length;
+    const averageHumidity = humidities.reduce((sum, i) => sum + i, 0) / humidities.length;
 
     return averageHumidity;
   }

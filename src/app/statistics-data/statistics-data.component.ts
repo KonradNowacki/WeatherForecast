@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-statistics-data',
@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsDataComponent implements OnInit {
 
+  @Input() public statistics: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.statistics);
   }
 
 }
