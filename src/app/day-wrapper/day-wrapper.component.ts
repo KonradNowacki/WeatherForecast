@@ -19,8 +19,24 @@ export class DayWrapperComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // console.log(this.forecast[1]);
 
+    this.morningTemperature = this.getTemperatureByPartOfDay(this.forecast, '06:00:00');
 
+  }
+
+  public getTemperatureByPartOfDay(forecast: any, partOfDay: any) {
+
+    console.log(forecast[1])
+
+    // const hour = forecast[1].dt_txt.split(' ')[1];
+
+    console.log()
+
+    switch (partOfDay) {
+      case '06:00:00':
+        return 3
+    }
   }
 
 }
