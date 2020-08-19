@@ -1,8 +1,8 @@
 <section>
     <div class="day-wrapper">
-        <header class="day-wrapper__header">Name of day</header>
+        <!-- <header class="day-wrapper__header">{{ forecast[0].dt_txt }}</header> -->
         <main class="day-wrapper__content">
-            content
+            {{ forecast[1][0].main.temp }}
         </main>
         <footer class="day-wrapper__footer">average</footer>
     </div>

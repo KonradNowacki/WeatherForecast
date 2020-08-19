@@ -1,3 +1,6 @@
 <main>
-  <app-day-wrapper></app-day-wrapper>
+    <app-day-wrapper 
+      *ngFor="let dailyForecast of dailyForecasts"
+      [forecast]="dailyForecast"
+    ></app-day-wrapper>
 </main>

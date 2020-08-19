@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 // TODO Make onpush
 @Component({
@@ -8,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DayWrapperComponent implements OnInit {
 
-  constructor() { }
+  @Input() public forecast: any;
+
+  public morningTemperature: any;
+  public dailyTemperature: any;
+  public eveningTemperature: any;
+
+  constructor() { 
+    
+  }
 
   ngOnInit(): void {
+
+
   }
 
 }
