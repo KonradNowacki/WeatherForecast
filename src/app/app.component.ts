@@ -23,14 +23,19 @@ export class AppComponent implements OnInit {
   }
 
     ngOnInit() {
-      this._dailyForecastsObservable.subscribe(el => {
-        this.dailyForecasts = this.getFiveDayForecast(el);
-        this.statisticsData = this.getStatisticsData(el);
-      });
+      this.getForecast();
     }
 
     public onCitySelected(cityId: number): void {
       this._dailyForecastsObservable = this._weatherService.getForecastObservable(cityId);
+      this.getForecast();
+    }
+
+    private getForecast(): void {
+      this._dailyForecastsObservable.subscribe(el => {
+        this.dailyForecasts = this.getFiveDayForecast(el);
+        this.statisticsData = this.getStatisticsData(el);
+      });
     }
 
     private getFiveDayForecast(list: any): any {
@@ -58,6 +63,8 @@ export class AppComponent implements OnInit {
       const maxTemp = Math.max(...filteredHours.map(forecast => forecast.main.temp_max));
       const minTemp = Math.min(...filteredHours.map(forecast => forecast.main.temp_min));
       const meanTemp = filteredHours.reduce((sum, increment) => sum + increment.main.temp, 0) / filteredHours.length;
+
+      // TODO dodaj dominantę
 
       return {
         maxTemp,
