@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { StatisticsData } from 'src/app/app.interface';
 
@@ -7,14 +7,7 @@ import { StatisticsData } from 'src/app/app.interface';
   templateUrl: './statistics-data.component.html',
   styleUrls: ['./statistics-data.component.scss']
 })
-export class StatisticsDataComponent implements OnInit {
+export class StatisticsDataComponent {
 
   @Input() public statistics: StatisticsData;
-
-  constructor() { }
-
-  ngOnInit(): void {
-    // console.log(this.statistics);
-  }
-
 }

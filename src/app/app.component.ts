@@ -11,12 +11,12 @@ import { PartOfDay, ForecastData, StatisticsData } from 'src/app/app.interface';
 })
 export class AppComponent implements OnInit {
 
-  public statisticsData: any;
-  public dailyForecasts: any;
+  public statisticsData: StatisticsData;
+  public dailyForecasts: ForecastData[][];
 
   private readonly _partOfDayHours: string[] = ['06:00:00', '12:00:00', '21:00:00'];
 
-  private _dailyForecastsObservable: Observable<any>;
+  private _dailyForecastsObservable: Observable<ForecastData[]>;
 
   constructor(
     private _weatherService: WeatherForecastService
@@ -40,23 +40,28 @@ export class AppComponent implements OnInit {
       });
     }
 
-    private getFiveDayForecast(list: ForecastData[]): any {
+    private getFiveDayForecast(list: ForecastData[]): ForecastData[][] {
 
       const filteredHours = list.filter(forecast => this._partOfDayHours.includes(forecast.dt_txt.split(' ')[1]));
 
-      const fiveDayForecast = new Map<string, ForecastData[]>();
+      const fiveDayForecastMap = new Map<string, ForecastData[]>();
 
       filteredHours.forEach(dailyForecast => {
         const currentDay = dailyForecast.dt_txt.split(' ')[0];
 
-        if (fiveDayForecast.has(currentDay)) {
-          fiveDayForecast.set(currentDay, [...fiveDayForecast.get(currentDay), dailyForecast]);
+        if (fiveDayForecastMap.has(currentDay)) {
+          fiveDayForecastMap.set(currentDay, [...fiveDayForecastMap.get(currentDay), dailyForecast]);
         } else {
-          fiveDayForecast.set(currentDay, [dailyForecast]);
+          fiveDayForecastMap.set(currentDay, [dailyForecast]);
         }
 
       });
-      return Array.from(fiveDayForecast);
+
+      const fiveDayForecast = Array.from(fiveDayForecastMap).map(forecast => forecast[1]);
+
+      console.log(fiveDayForecast);
+
+      return fiveDayForecast;
     }
 
     private getStatisticsData(list: ForecastData[]): StatisticsData {
@@ -68,8 +73,6 @@ export class AppComponent implements OnInit {
 
       const modeTemp = this.calculateMode(filteredHours.map(forecast => forecast.main.temp));
 
-      // TODO dodaj dominantę
-
       return {
         maxTemp,
         minTemp,
@@ -80,7 +83,6 @@ export class AppComponent implements OnInit {
 
     private calculateMode(numbers: number[]): number[] {
 
-      // Considering integers only to make it more likely to find the mode
       const integers = numbers.map(num => Math.round(num));
 
       const modeMap = new Map<number, number>();
@@ -100,8 +102,6 @@ export class AppComponent implements OnInit {
           modes.push(key);
         }
       });
-
-      console.log(modes);
 
       return modes;
     }

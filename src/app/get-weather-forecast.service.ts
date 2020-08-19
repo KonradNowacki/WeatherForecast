@@ -13,11 +13,13 @@ const appid = 'cf33963b4e0a2aa9bca1fd938ce9b1d8';
 })
 export class WeatherForecastService {
 
+  private readonly WarsawId = 756135;
+
   constructor(
     private _http: HttpClient
   ) { }
 
-  public getForecastObservable(cityId: number = 756135): Observable<ForecastData> {
+  public getForecastObservable(cityId: number = this.WarsawId): Observable<ForecastData[]> {
 
     const url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${appid}`;
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { PartOfDay } from './../app.interface';
+import { PartOfDay, ForecastData } from './../app.interface';
 
 // TODO Make onpush
 @Component({
@@ -10,7 +10,7 @@ import { PartOfDay } from './../app.interface';
 })
 export class DayWrapperComponent implements OnInit {
 
-  @Input() public forecast: any;
+  @Input() public forecast: ForecastData[];
 
   public morningTemperature: number;
   public dailyTemperature: number;
@@ -25,7 +25,7 @@ export class DayWrapperComponent implements OnInit {
     this.humidity = this.getAverageHumidity();
   }
 
-  public getTemperatureByPartOfDay(partOfDay: PartOfDay): any {
+  public getTemperatureByPartOfDay(partOfDay: PartOfDay): number {
     switch (partOfDay) {
       case PartOfDay.morning:
         const morningForecast = this.filterForecastByPartOfDay(PartOfDay.morning);
@@ -41,14 +41,14 @@ export class DayWrapperComponent implements OnInit {
     }
   }
 
-  private filterForecastByPartOfDay(partOfDay: PartOfDay): any {
-    return this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === partOfDay);
+  private filterForecastByPartOfDay(partOfDay: PartOfDay): ForecastData[] {
+    return this.forecast.filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === partOfDay);
   }
 
   // make more defensive
   // move calculating average to util
   private getAverageHumidity(): number {
-    const humidities = this.forecast[1].map(partOfDayForecast => partOfDayForecast.main.humidity);
+    const humidities = this.forecast.map(partOfDayForecast => partOfDayForecast.main.humidity);
     const averageHumidity = humidities.reduce((sum, i) => sum + i, 0) / humidities.length;
 
     return averageHumidity;
