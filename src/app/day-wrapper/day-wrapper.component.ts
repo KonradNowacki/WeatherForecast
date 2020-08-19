@@ -41,7 +41,7 @@ export class DayWrapperComponent implements OnInit {
 
       case PartOfDay.day:
         const dailyForecast = this.filterForecastByPartOfDay(PartOfDay.day);
-        console.log(dailyForecast)
+        // console.log(dailyForecast)
         if (dailyForecast.length) {
           return dailyForecast[0].main.temp;
         }
@@ -49,7 +49,7 @@ export class DayWrapperComponent implements OnInit {
 
       case PartOfDay.night:
         const eveningForecast = this.filterForecastByPartOfDay(PartOfDay.night);
-        console.log(eveningForecast)
+        // console.log(eveningForecast)
         if (eveningForecast.length) {
           return eveningForecast[0].main.temp;
         }

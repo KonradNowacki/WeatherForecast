@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
+  public statisticsData: any;
   public dailyForecasts: any;
   public dailyForecastsObservable: Observable<any>;
 
@@ -22,10 +23,11 @@ export class AppComponent implements OnInit {
     ngOnInit() {
       this.dailyForecastsObservable.subscribe(el => {
         this.dailyForecasts = this.getFiveDayForecast(el);
+        this.statisticsData = this.getStatisticsData(el);
       });
     }
 
-    public getFiveDayForecast(list: any): any {
+    private getFiveDayForecast(list: any): any {
 
       const filteredHours = list.filter(forecast => ['06:00:00', '12:00:00', '21:00:00'].includes(forecast.dt_txt.split(' ')[1]));
 
@@ -44,6 +46,18 @@ export class AppComponent implements OnInit {
       });
       // console.log(fiveDayForecast);
       return Array.from(fiveDayForecast);
+    }
+
+    private getStatisticsData(list: any): any {
+      const filteredHours = list.filter(forecast => ['06:00:00', '12:00:00', '21:00:00'].includes(forecast.dt_txt.split(' ')[1]));
+
+      const maxTemp = Math.max(...filteredHours.map(forecast => forecast.main.temp_max));
+      const minTemp = Math.min(...filteredHours.map(forecast => forecast.main.temp_max));
+      const meanTemp = filteredHours.reduce((sum, increment) => sum + increment.main.temp, 0) / filteredHours.length;
+
+      console.log(maxTemp);
+      console.log(minTemp);
+      console.log(meanTemp);
     }
 
 }
