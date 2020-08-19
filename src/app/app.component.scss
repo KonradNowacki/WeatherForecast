@@ -9,3 +9,9 @@ main {
 app-day-wrapper {
     margin: 0 15px;
 }
+
+.upper-row__wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}

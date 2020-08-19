@@ -29,6 +29,10 @@ export class AppComponent implements OnInit {
       });
     }
 
+    public onCitySelected(cityId: number): void {
+      this._dailyForecastsObservable = this._weatherService.getForecastObservable(cityId);
+    }
+
     private getFiveDayForecast(list: any): any {
 
       const filteredHours = list.filter(forecast => [PartOfDay.morning, PartOfDay.day, PartOfDay.night].includes(forecast.dt_txt.split(' ')[1]));

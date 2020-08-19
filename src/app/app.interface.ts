@@ -3,3 +3,8 @@ export enum PartOfDay {
     day = '12:00:00',
     night = '21:00:00'
 }
+
+export interface City {
+    id: number;
+    name: string;
+}

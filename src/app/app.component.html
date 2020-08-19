@@ -1,9 +1,14 @@
+<div class="upper-row__wrapper">
+  <app-city-picker
+  (citySelected)="onCitySelected($event)"
+  ></app-city-picker>
 
+  <app-statistics-data
+    *ngIf="statisticsData"
+    [statistics]="statisticsData"
+  ></app-statistics-data>
+</div>
 
-<app-statistics-data
-  *ngIf="statisticsData"
-  [statistics]="statisticsData"
-></app-statistics-data>
 
 <main>
   <app-day-wrapper 

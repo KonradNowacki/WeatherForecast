@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { take, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+// This should normally be kept in a place without public access
+const appid = 'cf33963b4e0a2aa9bca1fd938ce9b1d8';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,10 +18,13 @@ export class WeatherForecastService {
     private _http: HttpClient
   ) { }
 
-  public getForecastObservable(): any {
-    return this._http.get<any>('http://api.openweathermap.org/data/2.5/forecast?q=wroclaw&appid=cf33963b4e0a2aa9bca1fd938ce9b1d8')
+  public getForecastObservable(cityId: number = 756135): any {
+
+    const url = `http://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${appid}`;
+
+    return this._http.get<any>(url)
     .pipe(
-      take(1),
+      take(1), // tu czy  w subskrypcji
       map(data => data.list)
     );
   }

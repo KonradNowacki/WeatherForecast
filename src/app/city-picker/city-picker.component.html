@@ -1,0 +1,9 @@
+<h4>Select city to check its weather forecast</h4>
+<mat-form-field appearance="fill">
+  <mat-label>City</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let city of cities" [value]="city.id" (onSelectionChange)="onCitySelected($event)">
+      {{ city.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
