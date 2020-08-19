@@ -1,5 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+
+export enum PartOfDay {
+  morning = '06:00:00',
+  day = '12:00:00',
+  night = '21:00:00'
+}
+
 // TODO Make onpush
 @Component({
   selector: 'app-day-wrapper',
@@ -21,21 +28,43 @@ export class DayWrapperComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.forecast[1]);
 
-    this.morningTemperature = this.getTemperatureByPartOfDay(this.forecast, '06:00:00');
+    this.morningTemperature = this.getTemperatureByPartOfDay('06:00:00');
+    this.dailyTemperature = this.getTemperatureByPartOfDay('12:00:00');
+    this.eveningTemperature = this.getTemperatureByPartOfDay('21:00:00');
 
   }
 
-  public getTemperatureByPartOfDay(forecast: any, partOfDay: any) {
+  public getTemperatureByPartOfDay(partOfDay: any) {
 
-    console.log(forecast[1])
+    // console.log(this.forecast[1])
 
     // const hour = forecast[1].dt_txt.split(' ')[1];
 
-    console.log()
+    // console.log(partOfDay)
 
     switch (partOfDay) {
       case '06:00:00':
-        return 3
+        const morningForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '06:00:00');
+        if (morningForecast.length) {
+          return morningForecast[0].main.temp;
+        }
+        return;
+
+      case '12:00:00':
+        const dailyForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '12:00:00');
+        console.log(dailyForecast)
+        if (dailyForecast.length) {
+          return dailyForecast[0].main.temp;
+        }
+        return;
+
+      case '21:00:00':
+        const eveningForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '21:00:00');
+        console.log(eveningForecast)
+        if (eveningForecast.length) {
+          return eveningForecast[0].main.temp;
+        }
+        return;
     }
   }
 

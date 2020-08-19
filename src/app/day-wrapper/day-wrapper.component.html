@@ -2,7 +2,9 @@
     <div class="day-wrapper">
         <!-- <header class="day-wrapper__header">{{ forecast[0].dt_txt }}</header> -->
         <main class="day-wrapper__content">
-            {{ forecast[1][0].main.temp }}
+            <div>morningTemp: {{ morningTemperature }}</div>
+            <div>dailyTemp: {{ dailyTemperature }}</div>
+            <div>eveningTemperature: {{ eveningTemperature }}</div>
         </main>
         <footer class="day-wrapper__footer">average</footer>
     </div>
