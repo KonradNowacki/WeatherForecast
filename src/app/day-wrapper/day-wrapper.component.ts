@@ -21,51 +21,52 @@ export class DayWrapperComponent implements OnInit {
   public dailyTemperature: any;
   public eveningTemperature: any;
 
-  constructor() { 
-    
-  }
+  public humidity: any;
 
   ngOnInit(): void {
-    // console.log(this.forecast[1]);
-
-    this.morningTemperature = this.getTemperatureByPartOfDay('06:00:00');
-    this.dailyTemperature = this.getTemperatureByPartOfDay('12:00:00');
-    this.eveningTemperature = this.getTemperatureByPartOfDay('21:00:00');
-
+    this.morningTemperature = this.getTemperatureByPartOfDay(PartOfDay.morning);
+    this.dailyTemperature = this.getTemperatureByPartOfDay(PartOfDay.day);
+    this.eveningTemperature = this.getTemperatureByPartOfDay(PartOfDay.night);
+    this.humidity = this.getAverageHumidity();
   }
 
-  public getTemperatureByPartOfDay(partOfDay: any) {
-
-    // console.log(this.forecast[1])
-
-    // const hour = forecast[1].dt_txt.split(' ')[1];
-
-    // console.log(partOfDay)
-
+  public getTemperatureByPartOfDay(partOfDay: PartOfDay): any {
     switch (partOfDay) {
-      case '06:00:00':
-        const morningForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '06:00:00');
+      case PartOfDay.morning:
+        const morningForecast = this.filterForecastByPartOfDay(PartOfDay.morning);
         if (morningForecast.length) {
           return morningForecast[0].main.temp;
         }
         return;
 
-      case '12:00:00':
-        const dailyForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '12:00:00');
+      case PartOfDay.day:
+        const dailyForecast = this.filterForecastByPartOfDay(PartOfDay.day);
         console.log(dailyForecast)
         if (dailyForecast.length) {
           return dailyForecast[0].main.temp;
         }
         return;
 
-      case '21:00:00':
-        const eveningForecast = this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === '21:00:00');
+      case PartOfDay.night:
+        const eveningForecast = this.filterForecastByPartOfDay(PartOfDay.night);
         console.log(eveningForecast)
         if (eveningForecast.length) {
           return eveningForecast[0].main.temp;
         }
         return;
     }
+  }
+
+  private filterForecastByPartOfDay(partOfDay: PartOfDay): any {
+    return this.forecast[1].filter(partOfDayForecast => partOfDayForecast.dt_txt.split(' ')[1] === partOfDay);
+  }
+
+  // make more defensive
+  private getAverageHumidity(): any {
+    const humidities = this.forecast[1].map(partOfDayForecast => partOfDayForecast.main.humidity);
+    const averageHumidity = humidities.reduce((sum, i) => sum + i) / humidities.length;
+
+    return averageHumidity;
   }
 
 }
