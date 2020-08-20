@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { WeatherForecastService } from 'src/app/get-weather-forecast.service';
-import { PartOfDay, ForecastData, StatisticsData } from 'src/app/app.interface';
+import { ForecastData, StatisticsData } from 'src/app/app.interface';
+import { calculateAverage } from 'src/app/utils/calculate-average.util';
 
 @Component({
   selector: 'app-root',
@@ -69,7 +70,9 @@ export class AppComponent implements OnInit {
 
       const maxTemp = Math.max(...filteredHours.map(forecast => forecast.main.temp_max));
       const minTemp = Math.min(...filteredHours.map(forecast => forecast.main.temp_min));
-      const meanTemp = filteredHours.reduce((sum, increment) => sum + increment.main.temp, 0) / filteredHours.length;
+
+      const filteredHoursTemps = filteredHours.map(forecast => forecast.main.temp);
+      const meanTemp = calculateAverage(filteredHoursTemps);
 
       const modeTemp = this.calculateMode(filteredHours.map(forecast => forecast.main.temp));
 
