@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { WeatherForecastService } from 'src/app/get-weather-forecast.service';
 import { ForecastData, StatisticsData } from 'src/app/app.interface';
 import { calculateAverage } from 'src/app/utils/calculate-average.util';
+import { calculateMode } from 'src/app/utils/calculate-mode.util';
 
 @Component({
   selector: 'app-root',
@@ -71,8 +72,7 @@ export class AppComponent implements OnInit {
 
       const filteredHoursTemps = filteredHours.map(forecast => forecast.main.temp);
       const meanTemp = calculateAverage(filteredHoursTemps);
-
-      const modeTemp = this.calculateMode(filteredHours.map(forecast => forecast.main.temp));
+      const modeTemp = calculateMode(filteredHoursTemps);
 
       return {
         maxTemp,
@@ -80,32 +80,6 @@ export class AppComponent implements OnInit {
         meanTemp,
         modeTemp
       };
-    }
-
-    // move to util
-    private calculateMode(numbers: number[]): number[] {
-
-      const integers = numbers.map(num => Math.round(num));
-
-      const modeMap = new Map<number, number>();
-      integers.forEach(int => {
-        if (modeMap.has(int)) {
-          modeMap.set(int, modeMap.get(int) + 1);
-        } else {
-          modeMap.set(int, 1);
-        }
-      });
-
-      const modeOccurences = Math.max(...modeMap.values());
-
-      const modes: number[] = [];
-      modeMap.forEach((val, key) => {
-        if (val === modeOccurences) {
-          modes.push(key);
-        }
-      });
-
-      return modes;
     }
 
 }
