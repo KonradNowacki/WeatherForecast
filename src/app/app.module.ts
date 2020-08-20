@@ -6,14 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 
-import { AppComponent } from './app.component';
-import { DayWrapperComponent } from './day-wrapper/day-wrapper.component';
-import { WeatherForecastService } from './get-weather-forecast.service';
-import { StatisticsDataComponent } from './statistics-data/statistics-data.component';
-import { CityPickerComponent } from './city-picker/city-picker.component';
-import { KelvinToCelsiusPipe } from './pipes/kelvin-to-celsius.pipe';
-import { KelvinArrayToCelsiusPipe } from './pipes/kelvin-array-to-celsius.pipe';
-import { HumidityToPercentPipe } from './pipes/humidity-to-percent.pipe';
+import { AppComponent } from 'src/app/app.component';
+import { DayWrapperComponent } from 'src/app/components/day-wrapper/day-wrapper.component';
+import { WeatherForecastService } from 'src/app/get-weather-forecast.service';
+import { StatisticsDataComponent } from 'src/app/components/statistics-data/statistics-data.component';
+import { CityPickerComponent } from 'src/app/components/city-picker/city-picker.component';
+import { KelvinToCelsiusPipe } from 'src/app/pipes/kelvin-to-celsius.pipe';
+import { KelvinArrayToCelsiusPipe } from 'src/app/pipes/kelvin-array-to-celsius.pipe';
+import { HumidityToPercentPipe } from 'src/app/pipes/humidity-to-percent.pipe';
 
 @NgModule({
   declarations: [

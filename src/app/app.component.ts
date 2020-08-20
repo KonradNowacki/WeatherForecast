@@ -60,8 +60,6 @@ export class AppComponent implements OnInit {
 
       const fiveDayForecast = Array.from(fiveDayForecastMap).map(forecast => forecast[1]);
 
-      console.log(fiveDayForecast);
-
       return fiveDayForecast;
     }
 
@@ -84,6 +82,7 @@ export class AppComponent implements OnInit {
       };
     }
 
+    // move to util
     private calculateMode(numbers: number[]): number[] {
 
       const integers = numbers.map(num => Math.round(num));
