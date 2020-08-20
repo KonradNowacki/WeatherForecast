@@ -1,12 +1,30 @@
 <section>
     <div class="day-wrapper">
-        <!-- <header class="day-wrapper__header">{{ forecast[0].dt_txt }}</header> -->
+        <header class="day-wrapper__header">{{ todayDate }}</header>
         <main class="day-wrapper__content">
-            <div>morningTemp: {{ morningTemperature }}</div>
-            <div>dailyTemp: {{ dailyTemperature }}</div>
-            <div>eveningTemperature: {{ eveningTemperature }}</div>
-            <div>humidity: {{ humidity }}</div>
+
+            <mat-card class="morning__background">
+                <div>Morning</div>
+                <mat-card-content>{{ morningTemperature | kelvinToCelsius }}</mat-card-content>
+            </mat-card>
+
+            
+            <mat-card class="day__background">
+                <div>Day</div>
+                <mat-card-content>{{ dailyTemperature | kelvinToCelsius }}</mat-card-content>
+            </mat-card>
+
+            
+            <mat-card class="night__background white-text">
+                <div>Night</div>
+                <mat-card-content>{{ nightTemperature | kelvinToCelsius }}</mat-card-content>
+            </mat-card>
+
+            <mat-card class="humidity__box">
+                <div>Humidity</div>
+                <mat-card-content>{{ humidity | humidityToPercent }}</mat-card-content>
+            </mat-card>
+
         </main>
-        <footer class="day-wrapper__footer"></footer>
     </div>
 </section>

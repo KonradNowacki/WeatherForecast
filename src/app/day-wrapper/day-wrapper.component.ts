@@ -14,15 +14,18 @@ export class DayWrapperComponent implements OnInit {
 
   public morningTemperature: number;
   public dailyTemperature: number;
-  public eveningTemperature: number;
-
+  public nightTemperature: number;
   public humidity: number;
+
+  public todayDate: string;
 
   ngOnInit(): void {
     this.morningTemperature = this.getTemperatureByPartOfDay(PartOfDay.morning);
     this.dailyTemperature = this.getTemperatureByPartOfDay(PartOfDay.day);
-    this.eveningTemperature = this.getTemperatureByPartOfDay(PartOfDay.night);
+    this.nightTemperature = this.getTemperatureByPartOfDay(PartOfDay.night);
     this.humidity = this.getAverageHumidity();
+
+    this.todayDate = this.forecast[0].dt_txt.split(' ')[0];
   }
 
   public getTemperatureByPartOfDay(partOfDay: PartOfDay): number {

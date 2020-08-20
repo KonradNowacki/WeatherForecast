@@ -1,6 +1,45 @@
 .day-wrapper {
-    width: 100px;
-    height: 500px;
-    border: 2px solid red;
-    border-radius: 10px;;
+    width: 210px;
+    height: 300px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+mat-card {
+    margin: 6px 4px;
+    
+}
+
+mat-card-content {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    margin-top: 5px;
+}
+
+.humidity__box {
+    background-color: lightblue;
+}
+
+.morning__background {
+    background-image: url('./../../assets/morning.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.day__background {
+    background-image: url('./../../assets/day.jpg');
+    background-position: right;
+    background-size: cover;
+}
+
+.night__background {
+    background-image: url('./../../assets/night.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.white-text {
+    color: white;
 }
