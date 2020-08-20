@@ -25,15 +25,14 @@ export class WeatherForecastService {
 
     return this._http.get<any>(url)
     .pipe(
-      take(1), // TODO tu czy  w subskrypcji ??
+      take(1),
       map(data => data.list),
       map(data => {
         return data.map(el => {
           const { dt_txt, main } = el;
           return { dt_txt, main };
         });
-      }),
-      // tap(el => console.log(el)),
+      })
     );
   }
 

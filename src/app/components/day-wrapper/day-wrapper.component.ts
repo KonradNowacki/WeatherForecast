@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { PartOfDay, ForecastData } from 'src/app/app.interface';
 import { calculateAverage } from 'src/app/utils/calculate-average.util';
-
-// TODO Make onpush
 @Component({
   selector: 'app-day-wrapper',
   templateUrl: './day-wrapper.component.html',
-  styleUrls: ['./day-wrapper.component.scss']
+  styleUrls: ['./day-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DayWrapperComponent implements OnInit {
 
