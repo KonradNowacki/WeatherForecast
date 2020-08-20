@@ -4,6 +4,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { DayWrapperComponent } from './day-wrapper/day-wrapper.component';
@@ -23,14 +24,14 @@ import { HumidityToPercentPipe } from './pipes/humidity-to-percent.pipe';
     KelvinToCelsiusPipe,
     KelvinArrayToCelsiusPipe,
     HumidityToPercentPipe,
-
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NoopAnimationsModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [
     WeatherForecastService

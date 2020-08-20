@@ -1,5 +1,19 @@
 .stats__wrapper {
     width: 280px;
     height: 150px;
-    border: 2px solid blue;
+}
+
+mat-card-content {
+    margin-left: 4px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+mat-card {
+    width: 100%;
+}
+
+.stats-card__header {
+    text-align: center;
 }

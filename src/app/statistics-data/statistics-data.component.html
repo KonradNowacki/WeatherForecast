@@ -1,6 +1,40 @@
 <div class="stats__wrapper">
-    <div>max temp {{ statistics.maxTemp | kelvinToCelsius }}</div>
+    <!-- <div>max temp {{ statistics.maxTemp | kelvinToCelsius }}</div>
     <div>min temp {{ statistics.minTemp | kelvinToCelsius}}</div>
     <div>mean temp {{ statistics.meanTemp | kelvinToCelsius}}</div>
-    <div>mode temp {{ statistics.modeTemp | kelvinArrayToCelsius}}</div>
+    <div>mode temp {{ statistics.modeTemp | kelvinArrayToCelsius}}</div> -->
+
+    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="5px">
+        <mat-grid-tile>
+            <mat-card>
+                <div class="stats-card__header">Max</div>
+                <mat-card-content>{{ statistics.maxTemp | kelvinToCelsius }}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-card>
+                <div class="stats-card__header">Min</div>
+                <mat-card-content>{{ statistics.minTemp | kelvinToCelsius}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-card>
+                <div class="stats-card__header">Mean</div>
+                <mat-card-content>{{ statistics.meanTemp | kelvinToCelsius}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <mat-card>
+                <div class="stats-card__header">{{ statistics.modeTemp.length === 1 ? 'Mode' : 'Modes' }}</div>
+                <mat-card-content>{{ statistics.modeTemp | kelvinArrayToCelsius}}</mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
 </div>
+  
