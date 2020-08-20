@@ -1,6 +1,6 @@
 <section>
     <div class="day-wrapper">
-        <header class="day-wrapper__header">{{ todayDate }}</header>
+        <header class="day-wrapper__header">{{ isToday ? 'Today' : todayDate }}</header>
         <main class="day-wrapper__content">
 
             <mat-card class="morning__background">
@@ -20,7 +20,7 @@
                 <mat-card-content>{{ nightTemperature | kelvinToCelsius }}</mat-card-content>
             </mat-card>
 
-            <mat-card class="humidity__box">
+            <mat-card class="humidity__background">
                 <div>Humidity</div>
                 <mat-card-content>{{ humidity | humidityToPercent }}</mat-card-content>
             </mat-card>

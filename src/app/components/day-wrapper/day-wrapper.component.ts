@@ -12,6 +12,7 @@ import { calculateAverage } from 'src/app/utils/calculate-average.util';
 export class DayWrapperComponent implements OnInit {
 
   @Input() public forecast: ForecastData[];
+  @Input() public isToday: boolean;
 
   public morningTemperature: number;
   public dailyTemperature: number;

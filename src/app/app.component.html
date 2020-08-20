@@ -11,7 +11,8 @@
 
 <main>
   <app-day-wrapper 
-    *ngFor="let dailyForecast of dailyForecasts"
+    *ngFor="let dailyForecast of dailyForecasts; let i = index"
     [forecast]="dailyForecast"
+    [isToday]="i === 0"
   ></app-day-wrapper>
 </main>
