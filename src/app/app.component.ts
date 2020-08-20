@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   private readonly _partOfDayHours: string[] = ['06:00:00', '12:00:00', '21:00:00'];
 
   private _dailyForecastsObservable: Observable<ForecastData[]>;
+  private filteredHours: ForecastData[];
 
   constructor(
     private _weatherService: WeatherForecastService
@@ -36,19 +37,17 @@ export class AppComponent implements OnInit {
     }
 
     private getForecast(): void {
-      this._dailyForecastsObservable.subscribe(el => {
-        this.dailyForecasts = this.getFiveDayForecast(el);
-        this.statisticsData = this.getStatisticsData(el);
+      this._dailyForecastsObservable.subscribe(forecasts => {
+        this.filteredHours = forecasts.filter(forecast => this._partOfDayHours.includes(forecast.dt_txt.split(' ')[1]));
+        this.dailyForecasts = this.getFiveDayForecast(forecasts);
+        this.statisticsData = this.getStatisticsData(forecasts);
       });
     }
 
     private getFiveDayForecast(list: ForecastData[]): ForecastData[][] {
-
-      const filteredHours = list.filter(forecast => this._partOfDayHours.includes(forecast.dt_txt.split(' ')[1]));
-
       const fiveDayForecastMap = new Map<string, ForecastData[]>();
 
-      filteredHours.forEach(dailyForecast => {
+      this.filteredHours.forEach(dailyForecast => {
         const currentDay = dailyForecast.dt_txt.split(' ')[0];
 
         if (fiveDayForecastMap.has(currentDay)) {
@@ -56,30 +55,21 @@ export class AppComponent implements OnInit {
         } else {
           fiveDayForecastMap.set(currentDay, [dailyForecast]);
         }
-
       });
 
       const fiveDayForecast = Array.from(fiveDayForecastMap).map(forecast => forecast[1]);
-
       return fiveDayForecast;
     }
 
     private getStatisticsData(list: ForecastData[]): StatisticsData {
-      const filteredHours = list.filter(forecast => this._partOfDayHours.includes(forecast.dt_txt.split(' ')[1]));
+      const maxTemp = Math.max(...this.filteredHours.map(forecast => forecast.main.temp_max));
+      const minTemp = Math.min(...this.filteredHours.map(forecast => forecast.main.temp_min));
 
-      const maxTemp = Math.max(...filteredHours.map(forecast => forecast.main.temp_max));
-      const minTemp = Math.min(...filteredHours.map(forecast => forecast.main.temp_min));
-
-      const filteredHoursTemps = filteredHours.map(forecast => forecast.main.temp);
+      const filteredHoursTemps = this.filteredHours.map(forecast => forecast.main.temp);
       const meanTemp = calculateAverage(filteredHoursTemps);
       const modeTemp = calculateMode(filteredHoursTemps);
 
-      return {
-        maxTemp,
-        minTemp,
-        meanTemp,
-        modeTemp
-      };
+      return { maxTemp, minTemp, meanTemp, modeTemp };
     }
 
 }
